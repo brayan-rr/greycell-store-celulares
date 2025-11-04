@@ -3,276 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechMovil - Tienda de Celulares Premium</title>
+    <title>TechMovil - Los Mejores Precios en Celulares</title>
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
-    line-height: 1.6;
-    min-height: 100vh;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
 
-.header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    padding: 2rem 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-.header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-.container {
-    max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
 
-.filter-section {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-}
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem 3rem 0.8rem 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
 
-.filter-section h3 {
-    margin-bottom: 1rem;
-    color: #2a5298;
-    font-size: 1.3rem;
-}
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
 
-.filter-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
+        .whatsapp-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25D366;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
 
-.filter-btn {
-    padding: 0.7rem 1.5rem;
-    border: 2px solid #2a5298;
-    background: white;
-    color: #2a5298;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 600;
-    font-size: 1rem;
-}
+        .whatsapp-header:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
 
-.filter-btn:hover, .filter-btn.active {
-    background: #2a5298;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+        /* OFFERS BANNER */
+        .offers-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
 
-#products-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
 
-.product-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-}
+        /* CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-}
+        /* OFFERS SECTION */
+        .offers-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.3);
+        }
 
-.product-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1.2rem;
-    text-align: center;
-}
+        .offers-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-.product-brand {
-    font-size: 0.85rem;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
+        .offers-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-.product-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0.3rem 0;
-}
+        .fire-icon {
+            animation: bounce 1s infinite;
+        }
 
-.product-image {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-}
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-.product-image img {
-    max-width: 100%;
-    max-height: 180px;
-    object-fit: contain;
-    transition: transform 0.3s;
-}
+        .offers-timer {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+        }
 
-.product-card:hover .product-image img {
-    transform: scale(1.08);
-}
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
 
-.product-specs {
-    padding: 1.2rem;
-    flex-grow: 1;
-}
+        .offer-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
 
-.spec-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 0.6rem;
-    font-size: 0.9rem;
-}
+        .offer-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
 
-.spec-label {
-    font-weight: 600;
-    color: #555;
-    min-width: 80px;
-}
+        .offer-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff3838;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 10;
+            animation: shake 0.5s infinite;
+        }
 
-.spec-value {
-    color: #333;
-}
+        @keyframes shake {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
 
-.product-footer {
-    padding: 1.2rem;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
-}
+        /* FILTERS SECTION */
+        .filters-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
 
-.product-price {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2a5298;
-    margin-bottom: 1rem;
-    text-align: center;
-}
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-.whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.9rem;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-}
+        .filters-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
 
-.whatsapp-btn:hover {
-    background: #128C7E;
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-}
+        .clear-filters {
+            background: none;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
 
-.footer {
-    background: #1e3c72;
-    color: white;
-    text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
-}
+        .clear-filters:hover {
+            background: #667eea;
+            color: white;
+        }
 
-.footer-contact {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-}
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
 
-.footer-contact a {
-    color: #25D366;
-    text-decoration: none;
-    font-weight: bold;
-}
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-.footer-contact a:hover {
-    text-decoration: underline;
-}
+        .filter-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
 
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.8rem;
-    }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
 
-    #products-container {
-        grid-template-columns: 1fr;
-    }
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
 
-    .filter-buttons {
-        flex-direction: column;
-    }
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
 
-    .filter-btn {
-        width: 100%;
-    }
-}
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .price-slider {
+            width: 100%;
+            padding: 1rem 0;
+        }
+
+        .price-slider input {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .price-slider input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .price-range-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* PRODUCTS SECTION */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .products-count {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .sort-select {
+            padding: 0.6rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .product-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-brand {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0.3rem 0;
+        }
+
+        .product-image {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-specs {
+            padding: 1rem;
+            flex-grow: 1;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 75px;
+        }
+
+        .spec-value {
+            color: #333;
+        }
+
+        .product-footer {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .price-section {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #667eea;
+            display: inline-block;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: #ff3838;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.9rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-contact {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .footer-contact a {
+            color: #25D366;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .search-bar {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .offers-title {
+                font-size: 1.5rem;
+            }
+
+            .products-grid, .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* LOADING ANIMATION */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <div class="header">
-        <h1>📱 TechMovil</h1>
-        <p>Los mejores precios del mercado - Todos los modelos disponibles</p>
+        <div class="header-content">
+            <div class="logo">
+                📱 TechMovil
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar celular por modelo...">
+                <button onclick="searchProducts()">🔍 Buscar</button>
+            </div>
+            <a href="https://wa.me/51992039149?text=Hola!%20Quiero%20información" class="whatsapp-header" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                +51 992 039 149
+            </a>
+        </div>
     </div>
 
+    <!-- OFFERS BANNER -->
+    <div class="offers-banner">
+        🔥 ¡OFERTAS INCREÍBLES! Hasta 20% de descuento en modelos seleccionados 🔥
+    </div>
+
+    <!-- CONTAINER -->
     <div class="container">
-        <div class="filter-section">
-            <h3>🔍 Filtrar por marca:</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="samsung">Samsung</button>
-                <button class="filter-btn" data-filter="redmi">Redmi</button>
-                <button class="filter-btn" data-filter="poco">Poco</button>
-                <button class="filter-btn" data-filter="realme">Realme</button>
-                <button class="filter-btn" data-filter="honor">Honor</button>
+        
+        <!-- OFFERS SECTION -->
+        <div class="offers-section">
+            <div class="offers-header">
+                <div class="offers-title">
+                    <span class="fire-icon">🔥</span>
+                    SUPER OFERTAS
+                    <span class="fire-icon">🔥</span>
+                </div>
+                <div class="offers-timer">⏰ Ofertas Limitadas</div>
+            </div>
+            <div class="offers-grid" id="offers-container"></div>
+        </div>
+
+        <!-- FILTERS SECTION -->
+        <div class="filters-section">
+            <div class="filters-header">
+                <h2 class="filters-title">🎯 Filtros</h2>
+                <button class="clear-filters" onclick="clearFilters()">Limpiar Filtros</button>
+            </div>
+            <div class="filters-grid">
+                
+                <!-- BRAND FILTER -->
+                <div class="filter-group">
+                    <div class="filter-label">📱 Marca</div>
+                    <div class="filter-buttons" id="brand-filters">
+                        <button class="filter-btn active" data-brand="all">Todas</button>
+                        <button class="filter-btn" data-brand="samsung">Samsung</button>
+                        <button class="filter-btn" data-brand="redmi">Redmi</button>
+                        <button class="filter-btn" data-brand="poco">Poco</button>
+                        <button class="filter-btn" data-brand="realme">Realme</button>
+                        <button class="filter-btn" data-brand="honor">Honor</button>
+                    </div>
+                </div>
+
+                <!-- RAM FILTER -->
+                <div class="filter-group">
+                    <div class="filter-label">💾 Memoria RAM</div>
+                    <div class="filter-buttons" id="ram-filters">
+                        <button class="filter-btn active" data-ram="all">Todas</button>
+                        <button class="filter-btn" data-ram="4">4GB</button>
+                        <button class="filter-btn" data-ram="6">6GB</button>
+                        <button class="filter-btn" data-ram="8">8GB</button>
+                        <button class="filter-btn" data-ram="12">12GB+</button>
+                    </div>
+                </div>
+
+                <!-- PRICE FILTER -->
+                <div class="filter-group">
+                    <div class="filter-label">💰 Rango de Precio</div>
+                    <div class="price-slider">
+                        <input type="range" id="price-range" min="0" max="5000" value="5000" step="50">
+                        <div class="price-range-display">
+                            <span>S/ 0</span>
+                            <span id="max-price-display">S/ 5000</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div id="products-container"></div>
+        <!-- PRODUCTS SECTION -->
+        <div class="products-header">
+            <div class="products-count" id="products-count">Cargando productos...</div>
+            <select class="sort-select" id="sort-select" onchange="sortProducts()">
+                <option value="default">Ordenar por</option>
+                <option value="price-asc">Precio: Menor a Mayor</option>
+                <option value="price-desc">Precio: Mayor a Menor</option>
+                <option value="name-asc">Nombre: A-Z</option>
+                <option value="name-desc">Nombre: Z-A</option>
+            </select>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Cargando productos...</p>
+        </div>
+
+        <div class="products-grid" id="products-container"></div>
+        <div class="no-results" id="no-results" style="display: none;">
+            😔 No se encontraron productos con los filtros seleccionados
+        </div>
+
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
         <h2>📱 TechMovil - Tu Tienda de Confianza</h2>
         <p>Todos nuestros equipos son originales con garantía</p>
@@ -283,11 +688,13 @@ body {
             </a>
         </div>
         <p style="margin-top: 1rem; opacity: 0.8;">Horario: Lunes a Sábado 9:00 AM - 8:00 PM</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">© 2025 TechMovil. Todos los derechos reservados.</p>
     </div>
 
     <script>
+// PRODUCTS DATABASE
 const products = [
-    // SAMSUNG PRODUCTS
+    // SAMSUNG
     { brand: "samsung", name: "Galaxy A05", ram: "128/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 470, image: "SAMSUNG_A05.jpeg" },
     { brand: "samsung", name: "Galaxy A05", ram: "64/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 390, image: "SAMSUNG_A05.jpeg" },
     { brand: "samsung", name: "Galaxy A05S", ram: "128/6", screen: "6.7\" PLS LCD", camera: "50MP + 2MP + 2MP", battery: "5000 mAh", price: 560, image: "SAMSUNG_A05.jpeg" },
@@ -308,7 +715,7 @@ const products = [
     { brand: "samsung", name: "Galaxy F17 5G", ram: "128/4", screen: "6.7\" Super AMOLED", camera: "50MP + 2MP", battery: "5000 mAh", price: 680, image: "SAMSUNG_F17.jpeg" },
     { brand: "samsung", name: "Galaxy S25 ULTRA", ram: "512/12", screen: "6.8\" Dynamic AMOLED 2X", camera: "200MP + 50MP + 12MP + 10MP", battery: "5000 mAh", price: 4060, image: "SAMSUNG_S25.jpeg", flagship: true },
 
-    // REDMI PRODUCTS
+    // REDMI
     { brand: "redmi", name: "Redmi A5", ram: "64/3", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 350, image: "REDMI_A5.jpeg" },
     { brand: "redmi", name: "Redmi A5 REGISTRADO", ram: "64/3", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 390, image: "REDMI_A5.jpeg", registered: true },
     { brand: "redmi", name: "Redmi A5", ram: "128/4", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 390, image: "REDMI_A5.jpeg" },
@@ -325,27 +732,27 @@ const products = [
     { brand: "redmi", name: "Note 12 PRO PLUS", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5000 mAh", price: 1230, image: "redmi_12 pro.jpeg" },
     { brand: "redmi", name: "Note 13", ram: "128/6", screen: "6.67\" AMOLED", camera: "108MP + 8MP + 2MP", battery: "5000 mAh", price: 710, image: "redmi_13.jpeg" },
     { brand: "redmi", name: "Note 13 PRO 5G", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5100 mAh", price: 1220, image: "redmi_13pro.jpeg" },
-    { brand: "redmi", name: "Note 14", ram: "128/6", screen: "6.67\" AMOLED", camera: "50MP + 2MP", battery: "5110 mAh", price: 610, image: "xiaomi-redmi-note-14-pro.jpg" },
+    { brand: "redmi", name: "Note 14", ram: "128/6", screen: "6.67\" AMOLED", camera: "50MP + 2MP", battery: "5110 mAh", price: 610, image: "xiaomi-redmi-note-14-pro.jpg", offer: true, oldPrice: 710, discount: 14 },
     { brand: "redmi", name: "Note 14", ram: "256/8", screen: "6.67\" AMOLED", camera: "50MP + 2MP", battery: "5110 mAh", price: 690, image: "xiaomi-redmi-note-14-pro.jpg" },
     { brand: "redmi", name: "Note 14S", ram: "256/8", screen: "6.67\" AMOLED", camera: "50MP + 5MP + 2MP", battery: "5110 mAh", price: 860, image: "redmi_14s.jpeg" },
-    { brand: "redmi", name: "Note 14 PRO", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5500 mAh", price: 860, image: "redmi_14pro.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5500 mAh", price: 860, image: "redmi_14pro.jpeg", offer: true, oldPrice: 1020, discount: 16 },
     { brand: "redmi", name: "Note 14 PRO 5G", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5500 mAh", price: 970, image: "redmi_14pro.jpeg" },
     { brand: "redmi", name: "Note 14 PRO 5G", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5500 mAh", price: 1100, image: "redmi_14pro.jpeg" },
     { brand: "redmi", name: "Note 14 PRO PLUS", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 50MP + 8MP", battery: "6200 mAh", price: 1230, image: "redmi_note14pro plus.jpeg" },
     { brand: "redmi", name: "Note 14 PRO PLUS", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 50MP + 8MP", battery: "6200 mAh", price: 1350, image: "redmi_note14pro plus.jpeg" },
 
-    // POCO PRODUCTS
+    // POCO
     { brand: "poco", name: "Poco X5", ram: "256/8", screen: "6.67\" AMOLED", camera: "48MP + 8MP + 2MP", battery: "5000 mAh", price: 1010, image: "poco_x5(2).jpeg" },
     { brand: "poco", name: "Poco X7 PRO", ram: "256/12", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5000 mAh", price: 1200, image: "poco_x7pro.jpeg" },
     { brand: "poco", name: "Poco X7 PRO", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5000 mAh", price: 1350, image: "poco_x7pro.jpeg" },
     { brand: "poco", name: "Poco M6 PRO", ram: "512/12", screen: "6.67\" AMOLED", camera: "64MP + 8MP + 2MP", battery: "5000 mAh", price: 960, image: "poco_m6pro.jpeg" },
     { brand: "poco", name: "Poco F7 PRO", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP", battery: "5000 mAh", price: 1130, image: "poco_f7pro.jpeg" },
 
-    // REALME PRODUCTS
+    // REALME
     { brand: "realme", name: "Realme C21Y", ram: "64/4", screen: "6.5\" IPS LCD", camera: "13MP + 2MP + 2MP", battery: "5000 mAh", price: 510, image: "realme_c21y.jpeg" },
     { brand: "realme", name: "Realme C61", ram: "256/8", screen: "6.74\" IPS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 630, image: "realme_c61.jpeg" },
 
-    // HONOR PRODUCTS
+    // HONOR
     { brand: "honor", name: "Honor X5C", ram: "64/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 390, image: "honor_x5c.jpeg" },
     { brand: "honor", name: "Honor X5C", ram: "128/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 420, image: "honor_x5c.jpeg" },
     { brand: "honor", name: "Honor X5C REGISTRADO", ram: "64/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 420, image: "honor_x5c.jpeg", registered: true },
@@ -360,102 +767,290 @@ const products = [
     { brand: "honor", name: "Honor 200", ram: "256/12", screen: "6.7\" AMOLED 120Hz", camera: "50MP + 50MP + 12MP", battery: "5200 mAh", price: 1480, image: "honor_200.jpeg" },
     { brand: "honor", name: "Honor 400", ram: "12/256", screen: "6.7\" AMOLED", camera: "108MP + 50MP + 2MP", battery: "5200 mAh", price: 1430, image: "honor_400.jpeg" },
     { brand: "honor", name: "Honor 400", ram: "12/512", screen: "6.7\" AMOLED", camera: "108MP + 50MP + 2MP", battery: "5200 mAh", price: 1530, image: "honor_400.jpeg" },
-    { brand: "honor", name: "Honor 400 LITE", ram: "256/12", screen: "6.7\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "5200 mAh", price: 1010, image: "honor_400lite.jpeg" },
+    { brand: "honor", name: "Honor 400 LITE", ram: "256/12", screen: "6.7\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "5200 mAh", price: 1010, image: "honor_400lite.jpeg", offer: true, oldPrice: 1260, discount: 20 },
     { brand: "honor", name: "Honor 400 PRO", ram: "512/12", screen: "6.78\" AMOLED 120Hz", camera: "108MP + 50MP + 12MP", battery: "5200 mAh", price: 2630, image: "honor_400pro.jpeg" },
+    { brand: "honor", name: "Magic 7 LITE", ram: "512/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1230, image: "honor magic 7 lite.jpeg", offer: true, oldPrice: 1480, discount: 17 },
     { brand: "honor", name: "Magic 7 LITE", ram: "256/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1130, image: "honor magic 7 lite.jpeg" },
-    { brand: "honor", name: "Magic 7 LITE REGISTRADO", ram: "256/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1260, image: "honor magic 7 lite.jpeg", registered: true },
-    { brand: "honor", name: "Magic 7 LITE", ram: "512/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1230, image: "honor magic 7 lite.jpeg" }
+    { brand: "honor", name: "Magic 7 LITE REGISTRADO", ram: "256/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1260, image: "honor magic 7 lite.jpeg", registered: true }
 ];
 
-// Render products
-function renderProducts(filter = 'all') {
-    const container = document.getElementById('products-container');
-    container.innerHTML = '';
-    
-    const filteredProducts = filter === 'all' 
-        ? products 
-        : products.filter(p => p.brand === filter);
-    
-    filteredProducts.forEach(product => {
-        const card = createProductCard(product);
-        container.appendChild(card);
+// STATE
+let currentFilters = {
+    brand: 'all',
+    ram: 'all',
+    maxPrice: 5000,
+    search: ''
+};
+
+let currentSort = 'default';
+
+// INIT
+document.addEventListener('DOMContentLoaded', function() {
+    renderOffers();
+    renderProducts();
+    setupEventListeners();
+});
+
+// SETUP EVENT LISTENERS
+function setupEventListeners() {
+    // Brand filters
+    document.querySelectorAll('#brand-filters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('#brand-filters .filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilters.brand = this.dataset.brand;
+            renderProducts();
+        });
     });
+
+    // RAM filters
+    document.querySelectorAll('#ram-filters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('#ram-filters .filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilters.ram = this.dataset.ram;
+            renderProducts();
+        });
+    });
+
+    // Price slider
+    const priceSlider = document.getElementById('price-range');
+    const maxPriceDisplay = document.getElementById('max-price-display');
+    
+    priceSlider.addEventListener('input', function() {
+        currentFilters.maxPrice = parseInt(this.value);
+        maxPriceDisplay.textContent = `S/ ${currentFilters.maxPrice}`;
+        renderProducts();
+    });
+
+    // Search input
+    document.getElementById('search-input').addEventListener('input', function() {
+        currentFilters.search = this.value.toLowerCase();
+        renderProducts();
+    });
+}
+
+// RENDER OFFERS
+function renderOffers() {
+    const offersContainer = document.getElementById('offers-container');
+    const offerProducts = products.filter(p => p.offer);
+    
+    offersContainer.innerHTML = offerProducts.map(product => `
+        <div class="offer-card product-card">
+            <div class="offer-badge">-${product.discount}% OFF</div>
+            <div class="product-header">
+                <div class="product-brand">${product.brand.toUpperCase()}</div>
+                <div class="product-name">${product.name}</div>
+            </div>
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'">
+            </div>
+            <div class="product-specs">
+                <div class="spec-item">
+                    <span class="spec-label">💾 RAM/ROM:</span>
+                    <span class="spec-value">${product.ram} GB</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">📱 Pantalla:</span>
+                    <span class="spec-value">${product.screen}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">📸 Cámara:</span>
+                    <span class="spec-value">${product.camera}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">🔋 Batería:</span>
+                    <span class="spec-value">${product.battery}</span>
+                </div>
+            </div>
+            <div class="product-footer">
+                <div class="price-section">
+                    <span class="old-price">S/ ${product.oldPrice}</span>
+                    <span class="product-price">S/ ${product.price}</span>
+                    <span class="discount-badge">-${product.discount}%</span>
+                </div>
+                <a href="https://wa.me/51992039149?text=${encodeURIComponent(`🔥 OFERTA! Me interesa el ${product.name} (${product.ram}) - S/ ${product.price} (antes S/ ${product.oldPrice})`)}" class="whatsapp-btn" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    ¡Comprar Oferta!
+                </a>
+            </div>
+        </div>
+    `).join('');
+}
+
+// FILTER PRODUCTS
+function getFilteredProducts() {
+    let filtered = products.filter(p => !p.offer); // Exclude offer products from main grid
+    
+    // Brand filter
+    if (currentFilters.brand !== 'all') {
+        filtered = filtered.filter(p => p.brand === currentFilters.brand);
+    }
+    
+    // RAM filter
+    if (currentFilters.ram !== 'all') {
+        filtered = filtered.filter(p => {
+            const ram = parseInt(p.ram.split('/')[1]);
+            if (currentFilters.ram === '12') {
+                return ram >= 12;
+            }
+            return ram == currentFilters.ram;
+        });
+    }
+    
+    // Price filter
+    filtered = filtered.filter(p => p.price <= currentFilters.maxPrice);
+    
+    // Search filter
+    if (currentFilters.search) {
+        filtered = filtered.filter(p => 
+            p.name.toLowerCase().includes(currentFilters.search) ||
+            p.brand.toLowerCase().includes(currentFilters.search) ||
+            p.ram.toLowerCase().includes(currentFilters.search)
+        );
+    }
+    
+    return filtered;
+}
+
+// SORT PRODUCTS
+function sortProducts() {
+    currentSort = document.getElementById('sort-select').value;
+    renderProducts();
+}
+
+function applySorting(products) {
+    const sorted = [...products];
+    
+    switch(currentSort) {
+        case 'price-asc':
+            return sorted.sort((a, b) => a.price - b.price);
+        case 'price-desc':
+            return sorted.sort((a, b) => b.price - a.price);
+        case 'name-asc':
+            return sorted.sort((a, b) => a.name.localeCompare(b.name));
+        case 'name-desc':
+            return sorted.sort((a, b) => b.name.localeCompare(a.name));
+        default:
+            return sorted;
+    }
+}
+
+// RENDER PRODUCTS
+function renderProducts() {
+    const container = document.getElementById('products-container');
+    const noResults = document.getElementById('no-results');
+    const productsCount = document.getElementById('products-count');
+    
+    let filtered = getFilteredProducts();
+    filtered = applySorting(filtered);
+    
+    productsCount.textContent = `${filtered.length} productos encontrados`;
+    
+    if (filtered.length === 0) {
+        container.style.display = 'none';
+        noResults.style.display = 'block';
+        return;
+    }
+    
+    container.style.display = 'grid';
+    noResults.style.display = 'none';
+    
+    container.innerHTML = filtered.map(product => createProductCard(product)).join('');
 }
 
 function createProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    
     const whatsappMessage = `Hola! Me interesa el ${product.name} (${product.ram}) - S/ ${product.price}`;
     const whatsappUrl = `https://wa.me/51992039149?text=${encodeURIComponent(whatsappMessage)}`;
     
-    card.innerHTML = `
-        <div class="product-header">
-            <div class="product-brand">${product.brand.toUpperCase()}</div>
-            <div class="product-name">${product.name}</div>
-        </div>
-        <div class="product-image">
-            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=Imagen+No+Disponible'">
-        </div>
-        <div class="product-specs">
-            <div class="spec-item">
-                <span class="spec-label">💾 RAM/ROM:</span>
-                <span class="spec-value">${product.ram} GB</span>
+    return `
+        <div class="product-card">
+            <div class="product-header">
+                <div class="product-brand">${product.brand.toUpperCase()}</div>
+                <div class="product-name">${product.name}</div>
             </div>
-            <div class="spec-item">
-                <span class="spec-label">📱 Pantalla:</span>
-                <span class="spec-value">${product.screen}</span>
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'">
             </div>
-            <div class="spec-item">
-                <span class="spec-label">📸 Cámara:</span>
-                <span class="spec-value">${product.camera}</span>
+            <div class="product-specs">
+                <div class="spec-item">
+                    <span class="spec-label">💾 RAM/ROM:</span>
+                    <span class="spec-value">${product.ram} GB</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">📱 Pantalla:</span>
+                    <span class="spec-value">${product.screen}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">📸 Cámara:</span>
+                    <span class="spec-value">${product.camera}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">🔋 Batería:</span>
+                    <span class="spec-value">${product.battery}</span>
+                </div>
+                ${product.registered ? `
+                <div class="spec-item">
+                    <span class="spec-label">✅ Estado:</span>
+                    <span class="spec-value">Registrado en Perú</span>
+                </div>
+                ` : ''}
+                ${product.flagship ? `
+                <div class="spec-item">
+                    <span class="spec-label">✨ Tipo:</span>
+                    <span class="spec-value">Flagship</span>
+                </div>
+                ` : ''}
             </div>
-            <div class="spec-item">
-                <span class="spec-label">🔋 Batería:</span>
-                <span class="spec-value">${product.battery}</span>
+            <div class="product-footer">
+                <div class="price-section">
+                    <div class="product-price">S/ ${product.price}</div>
+                </div>
+                <a href="${whatsappUrl}" class="whatsapp-btn" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Comprar por WhatsApp
+                </a>
             </div>
-            ${product.registered ? `
-            <div class="spec-item">
-                <span class="spec-label">✅ Estado:</span>
-                <span class="spec-value">Registrado en Perú</span>
-            </div>
-            ` : ''}
-            ${product.flagship ? `
-            <div class="spec-item">
-                <span class="spec-label">✨ Tipo:</span>
-                <span class="spec-value">Flagship - Tope de Gama</span>
-            </div>
-            ` : ''}
-        </div>
-        <div class="product-footer">
-            <div class="product-price">S/ ${product.price}</div>
-            <a href="${whatsappUrl}" class="whatsapp-btn" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Comprar por WhatsApp
-            </a>
         </div>
     `;
-    
-    return card;
 }
 
-// Filter functionality
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        // Remove active class from all buttons
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
-        e.target.classList.add('active');
-        // Render filtered products
-        const filter = e.target.getAttribute('data-filter');
-        renderProducts(filter);
-    });
-});
+// SEARCH FUNCTION
+function searchProducts() {
+    const searchInput = document.getElementById('search-input');
+    currentFilters.search = searchInput.value.toLowerCase();
+    renderProducts();
+}
 
-// Initial render
-renderProducts();
+// CLEAR FILTERS
+function clearFilters() {
+    currentFilters = {
+        brand: 'all',
+        ram: 'all',
+        maxPrice: 5000,
+        search: ''
+    };
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.filter-btn[data-brand="all"], .filter-btn[data-ram="all"]').forEach(btn => {
+        btn.classList.add('active');
+    });
+    
+    document.getElementById('price-range').value = 5000;
+    document.getElementById('max-price-display').textContent = 'S/ 5000';
+    document.getElementById('search-input').value = '';
+    document.getElementById('sort-select').value = 'default';
+    currentSort = 'default';
+    
+    renderProducts();
+}
     </script>
 </body>
 </html>
