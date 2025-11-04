@@ -948,6 +948,39 @@
             margin-bottom: 1rem;
         }
 
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.5);
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            animation: slideInRight 0.4s, slideOutRight 0.4s 2.6s;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+
+        .toast-icon {
+            font-size: 2rem;
+            animation: bounce 0.6s;
+        }
+
         /* FOOTER */
         .footer {
             background: rgba(26, 26, 46, 0.95);
@@ -1116,15 +1149,42 @@
         <div class="footer-logo">📱 GreyCell Store</div>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;">Tu tienda tecnológica de confianza</p>
         <p>✅ Productos Originales • ✅ Garantía Oficial • ✅ Envío Gratis</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0; text-align: left; max-width: 900px; margin: 2rem auto;">
+            <div>
+                <h3 style="color: #e94560; margin-bottom: 0.5rem;">📞 Contacto</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">WhatsApp: +51 992 039 149</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Lun-Sáb: 9:00 AM - 8:00 PM</p>
+            </div>
+            <div>
+                <h3 style="color: #e94560; margin-bottom: 0.5rem;">🎁 Beneficios</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Envío gratis Lima</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Garantía oficial</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Productos originales</p>
+            </div>
+            <div>
+                <h3 style="color: #e94560; margin-bottom: 0.5rem;">💳 Pagos</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Yape / Plin</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Transferencia bancaria</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">✓ Tarjetas crédito/débito</p>
+            </div>
+        </div>
+        
         <div style="margin: 2rem 0; font-size: 1.3rem;">
-            <p>💬 Contáctanos:</p>
-            <a href="https://wa.me/51992039149?text=Hola!%20Quiero%20información" style="color: #25D366; text-decoration: none; font-weight: 900; font-size: 1.5rem;" target="_blank">
-                +51 992 039 149
+            <p style="margin-bottom: 0.5rem;">💬 ¿Necesitas ayuda?</p>
+            <a href="https://wa.me/51992039149?text=Hola!%20Necesito%20ayuda" style="color: #25D366; text-decoration: none; font-weight: 900; font-size: 1.5rem;" target="_blank">
+                Chatea con Nosotros
             </a>
         </div>
-        <p style="opacity: 0.7; margin-top: 1rem;">Lunes a Sábado: 9:00 AM - 8:00 PM</p>
-        <p style="opacity: 0.5; margin-top: 1rem; font-size: 0.9rem;">© 2025 GreyCell Store. Todos los derechos reservados.</p>
+        
+        <p style="opacity: 0.5; margin-top: 2rem; font-size: 0.85rem;">© 2025 GreyCell Store. Todos los derechos reservados.</p>
+        <p style="opacity: 0.4; margin-top: 0.5rem; font-size: 0.75rem;">RUC: XXXXXXXXXX | Lima, Perú</p>
     </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollTopBtn" style="display: none; position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #e94560 0%, #f77f00 100%); color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 10px 30px rgba(233, 69, 96, 0.5); z-index: 9999; transition: all 0.3s;" onclick="scrollToTop()">
+        ⬆️
+    </button>
 
     <script>
 const products = [
@@ -1443,10 +1503,33 @@ function addToCart(product) {
         localStorage.setItem('greycell_cart', JSON.stringify(cart));
         updateCartUI();
         
-        alert(`✅ ${product.name} agregado al carrito!`);
+        // Show toast notification
+        showToast(`✅ ${product.name} agregado al carrito`, 'success');
     } else {
-        alert(`⚠️ Este producto ya está en tu carrito`);
+        showToast(`⚠️ Este producto ya está en tu carrito`, 'warning');
     }
+}
+
+function showToast(message, type) {
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    
+    const icon = type === 'success' ? '✅' : '⚠️';
+    toast.innerHTML = `
+        <span class="toast-icon">${icon}</span>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
 }
 
 function removeFromCart(index) {
@@ -1562,12 +1645,12 @@ function applyCoupon() {
     const code = input.value.trim().toUpperCase();
     
     if (!code) {
-        alert('⚠️ Por favor ingresa un cupón');
+        showToast('⚠️ Por favor ingresa un cupón', 'warning');
         return;
     }
     
     if (!coupons[code]) {
-        alert('❌ Cupón inválido o expirado');
+        showToast('❌ Cupón inválido o expirado', 'warning');
         input.value = '';
         return;
     }
@@ -1576,13 +1659,14 @@ function applyCoupon() {
     localStorage.setItem('greycell_coupon', code);
     updateCartUI();
     
-    alert(`✅ ¡Cupón ${code} aplicado!\n🎉 ${coupons[code].description}`);
+    showToast(`✅ ¡Cupón ${code} aplicado! ${coupons[code].description}`, 'success');
 }
 
 function removeCoupon() {
     appliedCoupon = null;
     localStorage.removeItem('greycell_coupon');
     updateCartUI();
+    showToast('🗑️ Cupón removido', 'warning');
 }
 
 // CHECKOUT
@@ -1592,60 +1676,112 @@ function checkout() {
         return;
     }
     
-    let message = '🛒 *TICKET DE COMPRA - GreyCell Store*\n\n';
-    message += '📱 *PRODUCTOS:*\n';
-    message += '━━━━━━━━━━━━━━━━━━━\n';
+    const now = new Date();
+    const ticketNumber = 'GC' + now.getTime().toString().slice(-8);
+    const fecha = now.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const hora = now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+    
+    let message = '╔══════════════════════════════════╗\n';
+    message += '║  🛒 *TICKET DE COMPRA*          ║\n';
+    message += '║     *GREYCELL STORE*            ║\n';
+    message += '╚══════════════════════════════════╝\n\n';
+    
+    message += `📋 *Ticket N°:* ${ticketNumber}\n`;
+    message += `📅 *Fecha:* ${fecha} - ${hora}\n`;
+    message += `👤 *Cliente:* [Por confirmar]\n`;
+    message += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '📱 *DETALLE DE PRODUCTOS*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
     
     let subtotal = 0;
     let totalOfferDiscount = 0;
     
     cart.forEach((item, index) => {
-        message += `\n${index + 1}. *${item.name}*\n`;
-        message += `   💾 ${item.ram} GB\n`;
+        message += `*${index + 1}. ${item.brand.toUpperCase()} ${item.name}*\n`;
+        message += `   ├─ 💾 Memoria: ${item.ram} GB\n`;
+        message += `   ├─ 📱 Pantalla: ${item.screen}\n`;
+        message += `   ├─ 📸 Cámara: ${item.camera}\n`;
+        message += `   ├─ 🔋 Batería: ${item.battery}\n`;
         
-        if (item.offer) {
-            message += `   💰 Precio Normal: S/ ${item.oldPrice}\n`;
-            message += `   🎟️ DESCUENTO ${item.discount}% APLICADO\n`;
-            message += `   ✅ Precio con descuento: *S/ ${item.price}*\n`;
-            totalOfferDiscount += (item.oldPrice - item.price);
-        } else {
-            message += `   💰 Precio: *S/ ${item.price}*\n`;
+        if (item.registered) {
+            message += `   ├─ ✅ Registrado en Perú\n`;
         }
         
+        if (item.offer) {
+            message += `   ├─ 💰 Precio normal: S/ ${item.oldPrice}\n`;
+            message += `   ├─ 🎟️ Descuento especial: -${item.discount}%\n`;
+            message += `   └─ ✅ *Precio final: S/ ${item.price}*\n`;
+            totalOfferDiscount += (item.oldPrice - item.price);
+        } else {
+            message += `   └─ 💰 *Precio: S/ ${item.price}*\n`;
+        }
+        
+        message += '\n';
         subtotal += item.price;
     });
     
-    message += '\n━━━━━━━━━━━━━━━━━━━\n';
-    message += `📊 *Subtotal: S/ ${subtotal}*\n`;
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '💵 *RESUMEN DE PAGO*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+    message += `Subtotal productos: *S/ ${subtotal}*\n`;
     
     if (totalOfferDiscount > 0) {
-        message += `🔥 *Descuentos en productos: -S/ ${totalOfferDiscount}*\n`;
+        message += `🔥 Descuentos aplicados: *-S/ ${totalOfferDiscount}*\n`;
     }
     
     let couponDiscount = 0;
     if (appliedCoupon && coupons[appliedCoupon]) {
         couponDiscount = Math.round(subtotal * (coupons[appliedCoupon].discount / 100));
-        message += `🎟️ *Cupón ${appliedCoupon} (${coupons[appliedCoupon].discount}%): -S/ ${couponDiscount}*\n`;
+        message += `🎟️ Cupón *${appliedCoupon}* (${coupons[appliedCoupon].discount}%): *-S/ ${couponDiscount}*\n`;
     }
     
     const total = subtotal - couponDiscount;
     const totalSavings = totalOfferDiscount + couponDiscount;
     
     if (totalSavings > 0) {
-        message += `\n💰 *AHORRO TOTAL: S/ ${totalSavings}*\n`;
+        message += `\n┌─────────────────────────────────┐\n`;
+        message += `│ 💰 *AHORRO TOTAL: S/ ${totalSavings}* 🎉   │\n`;
+        message += `└─────────────────────────────────┘\n`;
     }
     
-    message += `\n💳 *TOTAL A PAGAR: S/ ${total}*\n`;
-    message += '\n✅ *Incluye:*\n';
-    message += '• Garantía oficial\n';
-    message += '• Envío gratis\n';
-    message += '• Factura/Boleta\n';
+    message += `\n╔══════════════════════════════════╗\n`;
+    message += `║ 💳 *TOTAL A PAGAR: S/ ${total}*     ║\n`;
+    message += `╚══════════════════════════════════╝\n\n`;
+    
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '✅ *BENEFICIOS INCLUIDOS*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+    message += '✓ Producto 100% original\n';
+    message += '✓ Garantía oficial de fábrica\n';
+    message += '✓ Factura o Boleta electrónica\n';
+    message += '✓ Envío GRATIS a todo Lima\n';
+    message += '✓ Asesoría post-venta\n';
     
     if (appliedCoupon) {
-        message += `\n🎟️ *Cupón ${appliedCoupon} validado correctamente*\n`;
+        message += `✓ Cupón ${appliedCoupon} validado ✅\n`;
     }
     
-    message += '\n¿Confirmas tu compra? 🚀';
+    message += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '📦 *PARA CONCLUIR TU COMPRA:*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+    message += '1️⃣ Confirma los productos seleccionados\n';
+    message += '2️⃣ Proporciona tu nombre completo\n';
+    message += '3️⃣ Indica tu dirección de entrega\n';
+    message += '4️⃣ Elige tu método de pago:\n';
+    message += '   • Transferencia/Yape/Plin\n';
+    message += '   • Tarjeta de crédito/débito\n';
+    message += '   • Efectivo (contra entrega)\n';
+    message += '5️⃣ Recibe tu pedido en 24-48 horas\n\n';
+    
+    message += '⚡ *¿Listo para finalizar tu compra?*\n';
+    message += '💬 Responde este mensaje para continuar\n\n';
+    
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '📞 *GREYCELL STORE*\n';
+    message += '🕐 Atención: Lun-Sáb 9:00-20:00\n';
+    message += '📱 WhatsApp: +51 992 039 149\n';
+    message += '🏆 Tu tienda tecnológica de confianza\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
     
     const whatsappUrl = `https://wa.me/51992039149?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -1710,6 +1846,35 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+// SCROLL TO TOP
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// SHOW/HIDE SCROLL TO TOP BUTTON
+window.addEventListener('scroll', function() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if (window.pageYOffset > 300) {
+        scrollBtn.style.display = 'block';
+    } else {
+        scrollBtn.style.display = 'none';
+    }
+});
+
+// HOVER EFFECT FOR SCROLL BUTTON
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    scrollBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1) rotate(5deg)';
+    });
+    scrollBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+    });
+});
     </script>
 </body>
 </html>
