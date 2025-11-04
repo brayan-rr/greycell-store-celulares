@@ -5,644 +5,272 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechMovil - Tienda de Celulares Premium</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
 
-        .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+.header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+.container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
 
-        .filter-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
+.filter-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
 
-        .filter-section h3 {
-            margin-bottom: 1rem;
-            color: #2a5298;
-        }
+.filter-section h3 {
+    margin-bottom: 1rem;
+    color: #2a5298;
+    font-size: 1.3rem;
+}
 
-        .filter-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
 
-        .filter-btn {
-            padding: 0.7rem 1.5rem;
-            border: 2px solid #2a5298;
-            background: white;
-            color: #2a5298;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
+.filter-btn {
+    padding: 0.7rem 1.5rem;
+    border: 2px solid #2a5298;
+    background: white;
+    color: #2a5298;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 1rem;
+}
 
-        .filter-btn:hover, .filter-btn.active {
-            background: #2a5298;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
+.filter-btn:hover, .filter-btn.active {
+    background: #2a5298;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+#products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
 
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+.product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-        }
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
 
-        .product-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
+.product-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.2rem;
+    text-align: center;
+}
 
-        .product-brand {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.product-brand {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
 
-        .product-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0.5rem 0;
-        }
+.product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0.3rem 0;
+}
 
-        .product-image {
-            background: #f8f9fa;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 250px;
-        }
+.product-image {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
 
-        .product-image img {
-            max-width: 100%;
-            max-height: 220px;
-            object-fit: contain;
-            transition: transform 0.3s;
-        }
+.product-image img {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
 
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
 
-        .product-specs {
-            padding: 1.5rem;
-            flex-grow: 1;
-        }
+.product-specs {
+    padding: 1.2rem;
+    flex-grow: 1;
+}
 
-        .spec-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-        }
+.spec-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+}
 
-        .spec-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.8rem;
-            color: #667eea;
-        }
+.spec-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 80px;
+}
 
-        .spec-label {
-            font-weight: 600;
-            color: #555;
-            min-width: 100px;
-        }
+.spec-value {
+    color: #333;
+}
 
-        .spec-value {
-            color: #333;
-        }
+.product-footer {
+    padding: 1.2rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
 
-        .product-footer {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-top: 1px solid #e9ecef;
-        }
+.product-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2a5298;
+    margin-bottom: 1rem;
+    text-align: center;
+}
 
-        .product-price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2a5298;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
 
-        .whatsapp-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            padding: 1rem;
-            background: #25D366;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
+.whatsapp-btn:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
 
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
+.footer {
+    background: #1e3c72;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
 
-        .whatsapp-icon {
-            width: 24px;
-            height: 24px;
-        }
+.footer-contact {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
 
-        .footer {
-            background: #1e3c72;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
+.footer-contact a {
+    color: #25D366;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        .footer-contact {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-        }
+.footer-contact a:hover {
+    text-decoration: underline;
+}
 
-        .footer-contact a {
-            color: #25D366;
-            text-decoration: none;
-            font-weight: bold;
-        }
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
+    #products-container {
+        grid-template-columns: 1fr;
+    }
 
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
+    .filter-buttons {
+        flex-direction: column;
+    }
 
-            .filter-buttons {
-                flex-direction: column;
-            }
-
-            .filter-btn {
-                width: 100%;
-            }
-        }
+    .filter-btn {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
     <div class="header">
         <h1>📱 TechMovil</h1>
-        <p>Tu tienda de celulares premium - Los mejores precios y modelos</p>
+        <p>Los mejores precios del mercado - Todos los modelos disponibles</p>
     </div>
 
     <div class="container">
         <div class="filter-section">
             <h3>🔍 Filtrar por marca:</h3>
             <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
-                <button class="filter-btn" onclick="filterProducts('apple')">Apple</button>
-                <button class="filter-btn" onclick="filterProducts('samsung')">Samsung</button>
-                <button class="filter-btn" onclick="filterProducts('xiaomi')">Xiaomi</button>
-                <button class="filter-btn" onclick="filterProducts('motorola')">Motorola</button>
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="samsung">Samsung</button>
+                <button class="filter-btn" data-filter="redmi">Redmi</button>
+                <button class="filter-btn" data-filter="poco">Poco</button>
+                <button class="filter-btn" data-filter="realme">Realme</button>
+                <button class="filter-btn" data-filter="honor">Honor</button>
             </div>
         </div>
 
-        <div class="products-grid" id="productsGrid">
-            <!-- Apple Products -->
-            <div class="product-card" data-brand="apple">
-                <div class="product-header">
-                    <div class="product-brand">Apple</div>
-                    <div class="product-name">iPhone 15 Pro Max</div>
-                </div>
-                <div class="product-image">
-                    <!-- Imagen desde tu repositorio de GitHub -->
-                    <img src="xiaomi-redmi-note-14-pro.jpg" alt="iPhone 15 Pro Max">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.7" OLED Super Retina XDR</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">A17 Pro Bionic</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">256GB / 512GB / 1TB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">48MP + 12MP + 12MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">4422 mAh</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🎨 Colores:</span>
-                        <span class="spec-value">Titanio Natural, Azul, Blanco, Negro</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 5,499</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20iPhone%2015%20Pro%20Max" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-card" data-brand="apple">
-                <div class="product-header">
-                    <div class="product-brand">Apple</div>
-                    <div class="product-name">iPhone 14</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1663499482523-1c0d5c2c41b7?w=400&h=500&fit=crop" alt="iPhone 14">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.1" OLED Super Retina XDR</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">A15 Bionic</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">128GB / 256GB / 512GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">12MP + 12MP Ultra Wide</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">3279 mAh</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🎨 Colores:</span>
-                        <span class="spec-value">Azul, Morado, Medianoche, Luz Estelar, Rojo</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 3,299</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20iPhone%2014" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <!-- Samsung Products -->
-            <div class="product-card" data-brand="samsung">
-                <div class="product-header">
-                    <div class="product-brand">Samsung</div>
-                    <div class="product-name">Galaxy S24 Ultra</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=500&fit=crop" alt="Galaxy S24 Ultra">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.8" Dynamic AMOLED 2X</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Snapdragon 8 Gen 3</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">256GB / 512GB / 1TB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">200MP + 50MP + 12MP + 10MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">5000 mAh</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">✏️ Extras:</span>
-                        <span class="spec-value">S Pen incluido, IA Galaxy AI</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 5,199</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Samsung%20Galaxy%20S24%20Ultra" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-card" data-brand="samsung">
-                <div class="product-header">
-                    <div class="product-brand">Samsung</div>
-                    <div class="product-name">Galaxy A54 5G</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=500&fit=crop" alt="Galaxy A54">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.4" Super AMOLED 120Hz</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Exynos 1380</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">128GB / 256GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">50MP + 12MP + 5MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">5000 mAh</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🎨 Colores:</span>
-                        <span class="spec-value">Negro, Verde Lima, Violeta, Blanco</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 1,299</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Samsung%20Galaxy%20A54%205G" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <!-- Xiaomi Products -->
-            <div class="product-card" data-brand="xiaomi">
-                <div class="product-header">
-                    <div class="product-brand">Xiaomi</div>
-                    <div class="product-name">Xiaomi 14 Pro</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=500&fit=crop" alt="Xiaomi 14 Pro">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.73" AMOLED 120Hz</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Snapdragon 8 Gen 3</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">256GB / 512GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">50MP Leica + 50MP + 50MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">4880 mAh, Carga 120W</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">✨ Extras:</span>
-                        <span class="spec-value">Lentes Leica, Carga inalámbrica 50W</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 3,899</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Xiaomi%2014%20Pro" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-card" data-brand="xiaomi">
-                <div class="product-header">
-                    <div class="product-brand">Xiaomi</div>
-                    <div class="product-name">Redmi Note 13 Pro</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=400&h=500&fit=crop" alt="Redmi Note 13 Pro">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.67" AMOLED 120Hz</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Snapdragon 7s Gen 2</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">128GB / 256GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">200MP + 8MP + 2MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">5100 mAh, Carga 67W</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💧 Resistencia:</span>
-                        <span class="spec-value">IP54</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 999</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Xiaomi%20Redmi%20Note%2013%20Pro" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <!-- Motorola Products -->
-            <div class="product-card" data-brand="motorola">
-                <div class="product-header">
-                    <div class="product-brand">Motorola</div>
-                    <div class="product-name">Edge 40 Pro</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=500&fit=crop" alt="Motorola Edge 40 Pro">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.67" OLED 165Hz</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Snapdragon 8 Gen 2</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">256GB / 512GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">50MP + 50MP Ultra Wide + 12MP</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">4600 mAh, Carga 125W</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">✨ Extras:</span>
-                        <span class="spec-value">Carga inalámbrica 15W, IP68</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 2,499</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Motorola%20Edge%2040%20Pro" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-card" data-brand="motorola">
-                <div class="product-header">
-                    <div class="product-brand">Motorola</div>
-                    <div class="product-name">Moto G84 5G</div>
-                </div>
-                <div class="product-image">
-                    <!-- INSTRUCCIONES: Reemplaza el src con la URL de tu imagen -->
-                    <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=500&fit=crop" alt="Moto G84">
-                </div>
-                <div class="product-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">📱 Pantalla:</span>
-                        <span class="spec-value">6.5" OLED 120Hz</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔲 Procesador:</span>
-                        <span class="spec-value">Snapdragon 695 5G</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">💾 Almacenamiento:</span>
-                        <span class="spec-value">128GB / 256GB</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">📸 Cámara:</span>
-                        <span class="spec-value">50MP + 8MP Ultra Wide</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🔋 Batería:</span>
-                        <span class="spec-value">5000 mAh, Carga 30W</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">🎨 Colores:</span>
-                        <span class="spec-value">Viva Magenta, Midnight Blue, Marshmallow Blue</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <div class="product-price">S/ 899</div>
-                    <a href="https://wa.me/51992039149?text=Hola!%20Me%20interesa%20el%20Motorola%20Moto%20G84%205G" class="whatsapp-btn" target="_blank">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        Comprar por WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div id="products-container"></div>
     </div>
 
     <div class="footer">
@@ -654,37 +282,180 @@
                 +51 992 039 149
             </a>
         </div>
-        <p style="margin-top: 1rem; opacity: 0.8;">Horario de atención: Lunes a Sábado 9:00 AM - 8:00 PM</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">Horario: Lunes a Sábado 9:00 AM - 8:00 PM</p>
     </div>
 
     <script>
-        function filterProducts(brand) {
-            const cards = document.querySelectorAll('.product-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter products
-            cards.forEach(card => {
-                if (brand === 'all' || card.dataset.brand === brand) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+const products = [
+    // SAMSUNG PRODUCTS
+    { brand: "samsung", name: "Galaxy A05", ram: "128/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 470, image: "SAMSUNG_A05.jpeg" },
+    { brand: "samsung", name: "Galaxy A05", ram: "64/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 390, image: "SAMSUNG_A05.jpeg" },
+    { brand: "samsung", name: "Galaxy A05S", ram: "128/6", screen: "6.7\" PLS LCD", camera: "50MP + 2MP + 2MP", battery: "5000 mAh", price: 560, image: "SAMSUNG_A05.jpeg" },
+    { brand: "samsung", name: "Galaxy A06 REGISTRADO", ram: "64/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 420, image: "SAMSUNG_A06.jpeg", registered: true },
+    { brand: "samsung", name: "Galaxy A06", ram: "128/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 490, image: "SAMSUNG_A06.jpeg" },
+    { brand: "samsung", name: "Galaxy A07 REGISTRADO", ram: "64/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 490, image: "SAMSUNG_A07.jpeg", registered: true },
+    { brand: "samsung", name: "Galaxy A07 REGISTRADO", ram: "128/4", screen: "6.7\" PLS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 540, image: "SAMSUNG_A07.jpeg", registered: true },
+    { brand: "samsung", name: "Galaxy A16", ram: "128/4", screen: "6.7\" Super AMOLED", camera: "50MP + 5MP + 2MP", battery: "5000 mAh", price: 560, image: "SAMSUNG_A16.jpeg" },
+    { brand: "samsung", name: "Galaxy A16 REGISTRADO", ram: "128/4", screen: "6.7\" Super AMOLED", camera: "50MP + 5MP + 2MP", battery: "5000 mAh", price: 590, image: "SAMSUNG_A16.jpeg", registered: true },
+    { brand: "samsung", name: "Galaxy A16", ram: "128/6", screen: "6.7\" Super AMOLED", camera: "50MP + 5MP + 2MP", battery: "5000 mAh", price: 640, image: "SAMSUNG_A16.jpeg" },
+    { brand: "samsung", name: "Galaxy A16", ram: "256/8", screen: "6.7\" Super AMOLED", camera: "50MP + 5MP + 2MP", battery: "5000 mAh", price: 770, image: "SAMSUNG_A16.jpeg" },
+    { brand: "samsung", name: "Galaxy A17", ram: "256/8", screen: "6.7\" Super AMOLED", camera: "50MP + 5MP + 2MP", battery: "5000 mAh", price: 860, image: "SAMSUNG_A17.jpeg" },
+    { brand: "samsung", name: "Galaxy A26", ram: "256/8", screen: "6.7\" Super AMOLED", camera: "50MP + 8MP + 5MP", battery: "5000 mAh", price: 860, image: "SAMSUNG_A26.jpeg" },
+    { brand: "samsung", name: "Galaxy A36", ram: "256/8", screen: "6.6\" Super AMOLED", camera: "50MP + 8MP + 5MP", battery: "5000 mAh", price: 1130, image: "SAMSUNG_A36.jpeg" },
+    { brand: "samsung", name: "Galaxy A36", ram: "256/12", screen: "6.6\" Super AMOLED", camera: "50MP + 8MP + 5MP", battery: "5000 mAh", price: 1180, image: "SAMSUNG_A36.jpeg" },
+    { brand: "samsung", name: "Galaxy A56", ram: "256/8", screen: "6.7\" Super AMOLED", camera: "50MP + 12MP + 5MP", battery: "5000 mAh", price: 1330, image: "SAMSUNG_A56.jpeg" },
+    { brand: "samsung", name: "Galaxy A56", ram: "256/12", screen: "6.7\" Super AMOLED", camera: "50MP + 12MP + 5MP", battery: "5000 mAh", price: 1380, image: "SAMSUNG_A56.jpeg" },
+    { brand: "samsung", name: "Galaxy F17 5G", ram: "128/4", screen: "6.7\" Super AMOLED", camera: "50MP + 2MP", battery: "5000 mAh", price: 680, image: "SAMSUNG_F17.jpeg" },
+    { brand: "samsung", name: "Galaxy S25 ULTRA", ram: "512/12", screen: "6.8\" Dynamic AMOLED 2X", camera: "200MP + 50MP + 12MP + 10MP", battery: "5000 mAh", price: 4060, image: "SAMSUNG_S25.jpeg", flagship: true },
 
-        // Add smooth scroll for better UX
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+    // REDMI PRODUCTS
+    { brand: "redmi", name: "Redmi A5", ram: "64/3", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 350, image: "REDMI_A5.jpeg" },
+    { brand: "redmi", name: "Redmi A5 REGISTRADO", ram: "64/3", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 390, image: "REDMI_A5.jpeg", registered: true },
+    { brand: "redmi", name: "Redmi A5", ram: "128/4", screen: "6.71\" IPS LCD", camera: "8MP", battery: "5000 mAh", price: 390, image: "REDMI_A5.jpeg" },
+    { brand: "redmi", name: "Redmi 9C", ram: "128/4", screen: "6.53\" IPS LCD", camera: "13MP + 2MP + 2MP", battery: "5000 mAh", price: 490, image: "REDMI_9C.jpeg" },
+    { brand: "redmi", name: "Redmi 14C", ram: "128/4", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 450, image: "REDMI_14C.jpeg" },
+    { brand: "redmi", name: "Redmi 14C", ram: "256/4", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 480, image: "REDMI_14C.jpeg" },
+    { brand: "redmi", name: "Redmi 14C", ram: "256/8", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 530, image: "REDMI_14C.jpeg" },
+    { brand: "redmi", name: "Redmi 15", ram: "256/8", screen: "6.74\" AMOLED", camera: "50MP + 2MP", battery: "6000 mAh", price: 710, image: "REDMI_15.jpeg" },
+    { brand: "redmi", name: "Redmi 15C", ram: "128/4", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 490, image: "REDMI_15C.jpeg" },
+    { brand: "redmi", name: "Redmi 15C REGISTRADO", ram: "128/4", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 540, image: "REDMI_15C.jpeg", registered: true },
+    { brand: "redmi", name: "Redmi 15C", ram: "256/8", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 560, image: "REDMI_15C.jpeg" },
+    { brand: "redmi", name: "Redmi 15C REGISTRADO", ram: "256/4", screen: "6.88\" IPS LCD", camera: "50MP", battery: "5160 mAh", price: 620, image: "REDMI_15C.jpeg", registered: true },
+    { brand: "redmi", name: "Note 12", ram: "256/8", screen: "6.67\" AMOLED", camera: "50MP + 8MP + 2MP", battery: "5000 mAh", price: 860, image: "REDMI_12.jpeg" },
+    { brand: "redmi", name: "Note 12 PRO PLUS", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5000 mAh", price: 1230, image: "redmi_12 pro.jpeg" },
+    { brand: "redmi", name: "Note 13", ram: "128/6", screen: "6.67\" AMOLED", camera: "108MP + 8MP + 2MP", battery: "5000 mAh", price: 710, image: "redmi_13.jpeg" },
+    { brand: "redmi", name: "Note 13 PRO 5G", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5100 mAh", price: 1220, image: "redmi_13pro.jpeg" },
+    { brand: "redmi", name: "Note 14", ram: "128/6", screen: "6.67\" AMOLED", camera: "50MP + 2MP", battery: "5110 mAh", price: 610, image: "xiaomi-redmi-note-14-pro.jpg" },
+    { brand: "redmi", name: "Note 14", ram: "256/8", screen: "6.67\" AMOLED", camera: "50MP + 2MP", battery: "5110 mAh", price: 690, image: "xiaomi-redmi-note-14-pro.jpg" },
+    { brand: "redmi", name: "Note 14S", ram: "256/8", screen: "6.67\" AMOLED", camera: "50MP + 5MP + 2MP", battery: "5110 mAh", price: 860, image: "redmi_14s.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5500 mAh", price: 860, image: "redmi_14pro.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO 5G", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5500 mAh", price: 970, image: "redmi_14pro.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO 5G", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 8MP + 2MP", battery: "5500 mAh", price: 1100, image: "redmi_14pro.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO PLUS", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 50MP + 8MP", battery: "6200 mAh", price: 1230, image: "redmi_note14pro plus.jpeg" },
+    { brand: "redmi", name: "Note 14 PRO PLUS", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "200MP + 50MP + 8MP", battery: "6200 mAh", price: 1350, image: "redmi_note14pro plus.jpeg" },
+
+    // POCO PRODUCTS
+    { brand: "poco", name: "Poco X5", ram: "256/8", screen: "6.67\" AMOLED", camera: "48MP + 8MP + 2MP", battery: "5000 mAh", price: 1010, image: "poco_x5(2).jpeg" },
+    { brand: "poco", name: "Poco X7 PRO", ram: "256/12", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5000 mAh", price: 1200, image: "poco_x7pro.jpeg" },
+    { brand: "poco", name: "Poco X7 PRO", ram: "512/12", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP + 2MP", battery: "5000 mAh", price: 1350, image: "poco_x7pro.jpeg" },
+    { brand: "poco", name: "Poco M6 PRO", ram: "512/12", screen: "6.67\" AMOLED", camera: "64MP + 8MP + 2MP", battery: "5000 mAh", price: 960, image: "poco_m6pro.jpeg" },
+    { brand: "poco", name: "Poco F7 PRO", ram: "256/8", screen: "6.67\" AMOLED 120Hz", camera: "50MP + 8MP", battery: "5000 mAh", price: 1130, image: "poco_f7pro.jpeg" },
+
+    // REALME PRODUCTS
+    { brand: "realme", name: "Realme C21Y", ram: "64/4", screen: "6.5\" IPS LCD", camera: "13MP + 2MP + 2MP", battery: "5000 mAh", price: 510, image: "realme_c21y.jpeg" },
+    { brand: "realme", name: "Realme C61", ram: "256/8", screen: "6.74\" IPS LCD", camera: "50MP + 2MP", battery: "5000 mAh", price: 630, image: "realme_c61.jpeg" },
+
+    // HONOR PRODUCTS
+    { brand: "honor", name: "Honor X5C", ram: "64/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 390, image: "honor_x5c.jpeg" },
+    { brand: "honor", name: "Honor X5C", ram: "128/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 420, image: "honor_x5c.jpeg" },
+    { brand: "honor", name: "Honor X5C REGISTRADO", ram: "64/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 420, image: "honor_x5c.jpeg", registered: true },
+    { brand: "honor", name: "Honor X6B", ram: "128/4", screen: "6.56\" IPS LCD", camera: "50MP", battery: "5200 mAh", price: 470, image: "honor_x6b.jpeg" },
+    { brand: "honor", name: "Honor X6C", ram: "256/8", screen: "6.77\" IPS LCD", camera: "50MP + 2MP", battery: "5200 mAh", price: 570, image: "honor_x6c.jpeg" },
+    { brand: "honor", name: "Honor X6C REGISTRADO", ram: "256/8", screen: "6.77\" IPS LCD", camera: "50MP + 2MP", battery: "5200 mAh", price: 590, image: "honor_x6c.jpeg", registered: true },
+    { brand: "honor", name: "Honor X7C", ram: "256/8", screen: "6.77\" IPS LCD", camera: "108MP + 2MP", battery: "6000 mAh", price: 670, image: "honor_x7c.jpeg" },
+    { brand: "honor", name: "Honor X7D", ram: "256/8", screen: "6.77\" IPS LCD", camera: "108MP + 2MP", battery: "6000 mAh", price: 670, image: "honor_x7d.jpeg" },
+    { brand: "honor", name: "Honor X8A", ram: "256/8", screen: "6.7\" IPS LCD", camera: "100MP + 2MP + 2MP", battery: "4500 mAh", price: 840, image: "honor_x8a.jpeg" },
+    { brand: "honor", name: "Honor X8C", ram: "256/8", screen: "6.7\" IPS LCD", camera: "108MP + 5MP + 2MP", battery: "5330 mAh", price: 830, image: "honor_x8c.jpeg" },
+    { brand: "honor", name: "Honor 200 LITE", ram: "256/8", screen: "6.7\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "4500 mAh", price: 910, image: "honor_200lite.jpeg" },
+    { brand: "honor", name: "Honor 200", ram: "256/12", screen: "6.7\" AMOLED 120Hz", camera: "50MP + 50MP + 12MP", battery: "5200 mAh", price: 1480, image: "honor_200.jpeg" },
+    { brand: "honor", name: "Honor 400", ram: "12/256", screen: "6.7\" AMOLED", camera: "108MP + 50MP + 2MP", battery: "5200 mAh", price: 1430, image: "honor_400.jpeg" },
+    { brand: "honor", name: "Honor 400", ram: "12/512", screen: "6.7\" AMOLED", camera: "108MP + 50MP + 2MP", battery: "5200 mAh", price: 1530, image: "honor_400.jpeg" },
+    { brand: "honor", name: "Honor 400 LITE", ram: "256/12", screen: "6.7\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "5200 mAh", price: 1010, image: "honor_400lite.jpeg" },
+    { brand: "honor", name: "Honor 400 PRO", ram: "512/12", screen: "6.78\" AMOLED 120Hz", camera: "108MP + 50MP + 12MP", battery: "5200 mAh", price: 2630, image: "honor_400pro.jpeg" },
+    { brand: "honor", name: "Magic 7 LITE", ram: "256/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1130, image: "honor magic 7 lite.jpeg" },
+    { brand: "honor", name: "Magic 7 LITE REGISTRADO", ram: "256/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1260, image: "honor magic 7 lite.jpeg", registered: true },
+    { brand: "honor", name: "Magic 7 LITE", ram: "512/8", screen: "6.78\" AMOLED", camera: "108MP + 5MP + 2MP", battery: "6600 mAh", price: 1230, image: "honor magic 7 lite.jpeg" }
+];
+
+// Render products
+function renderProducts(filter = 'all') {
+    const container = document.getElementById('products-container');
+    container.innerHTML = '';
+    
+    const filteredProducts = filter === 'all' 
+        ? products 
+        : products.filter(p => p.brand === filter);
+    
+    filteredProducts.forEach(product => {
+        const card = createProductCard(product);
+        container.appendChild(card);
+    });
+}
+
+function createProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    
+    const whatsappMessage = `Hola! Me interesa el ${product.name} (${product.ram}) - S/ ${product.price}`;
+    const whatsappUrl = `https://wa.me/51992039149?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    card.innerHTML = `
+        <div class="product-header">
+            <div class="product-brand">${product.brand.toUpperCase()}</div>
+            <div class="product-name">${product.name}</div>
+        </div>
+        <div class="product-image">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=Imagen+No+Disponible'">
+        </div>
+        <div class="product-specs">
+            <div class="spec-item">
+                <span class="spec-label">💾 RAM/ROM:</span>
+                <span class="spec-value">${product.ram} GB</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">📱 Pantalla:</span>
+                <span class="spec-value">${product.screen}</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">📸 Cámara:</span>
+                <span class="spec-value">${product.camera}</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">🔋 Batería:</span>
+                <span class="spec-value">${product.battery}</span>
+            </div>
+            ${product.registered ? `
+            <div class="spec-item">
+                <span class="spec-label">✅ Estado:</span>
+                <span class="spec-value">Registrado en Perú</span>
+            </div>
+            ` : ''}
+            ${product.flagship ? `
+            <div class="spec-item">
+                <span class="spec-label">✨ Tipo:</span>
+                <span class="spec-value">Flagship - Tope de Gama</span>
+            </div>
+            ` : ''}
+        </div>
+        <div class="product-footer">
+            <div class="product-price">S/ ${product.price}</div>
+            <a href="${whatsappUrl}" class="whatsapp-btn" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Comprar por WhatsApp
+            </a>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Filter functionality
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // Remove active class from all buttons
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        e.target.classList.add('active');
+        // Render filtered products
+        const filter = e.target.getAttribute('data-filter');
+        renderProducts(filter);
+    });
+});
+
+// Initial render
+renderProducts();
     </script>
 </body>
 </html>
